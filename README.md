@@ -1,11 +1,11 @@
 # dnmp
 
 #### 介绍
-php7.2 + nginx + mysql + redis + phpmyadmin + redisadmin + elasticsearch6.5 + elastichq + rabbitmq
+php7.3 + php7.2 + nginx + mysql + redis + phpmyadmin + redisadmin + elasticsearch6.8 + elastichq + rabbitmq + mongo + mongo-express 一键集成环境
 
 
 #### 软件架构
-DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的LNMP一键安装程序。
+DNMP（Docker + Nginx + MySQL + PHP7 + Redis）是一款全功能的LNMP一键安装程序。
 
 
 #### 安装教程
@@ -13,7 +13,10 @@ DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的LNMP一键
 1. 本地安装`git`、`docker`和`docker-compose`。
 2. `clone`项目：
     ```
+    国内地址：
     git clone https://gitee.com/qiuapeng921/dnmp.git
+    全网地址：
+    git clone https://github.com/qiuapeng921/dnmp.git
     ```
 3. 如果不是`root`用户，还需将当前用户加入`docker`用户组：
     ```
@@ -32,16 +35,16 @@ DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的LNMP一键
 
 1. 要修改端口、日志文件位置、以及是否替换source.list文件等，请修改.env文件，然后重新构建：  
     ```bash
-    docker-compose build php56    # 重建单个服务
+    docker-compose build php72    # 重建单个服务
     docker-compose build          # 重建全部服务
     ```
 2. 切换PHP版本
     ```
-    fastcgi_pass   php56:9000;
-    ```
-    要改用PHP7.2，修改为：
-    ```
     fastcgi_pass   php72:9000;
+    ```
+    要改用PHP7.3，修改为：
+    ```
+    fastcgi_pass   php73:9000;
     ```
     再 **重启 Nginx** 生效。
     ```bash
@@ -54,7 +57,9 @@ DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的LNMP一键
     ```bash
     alias dnginx='docker exec -it dnmp_nginx_1 /bin/sh'
     alias dphp72='docker exec -it dnmp_php72_1 /bin/bash'
-    alias dphp56='docker exec -it dnmp_php56_1 /bin/bash'
+    alias dphp73='docker exec -it dnmp_php73_1 /bin/bash'
     alias dmysql='docker exec -it dnmp_mysql_1 /bin/bash'
     alias dredis='docker exec -it dnmp_redis_1 /bin/sh'
+    alias drabbit='docker exec -it dnmp_rabbit_1 /bin/bash'
+    alias dmongo='docker exec -it dnmp_mongo_1 /bin/bash'
     ```
