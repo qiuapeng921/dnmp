@@ -30,7 +30,7 @@ RUN apt-get update \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && composer self-update --clean-backups \
-    && composer config -g repo.packagist composer https://packagist.laravel-china.org
+    && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 # PDO extension
 RUN docker-php-ext-install pdo_mysql
