@@ -15,7 +15,7 @@ services:
       - default
 
   php72:
-    image: registry.cn-hangzhou.aliyuncs.com/qiuapeng/easyswoole:1.0     
+    image: registry.cn-hangzhou.aliyuncs.com/qiuapeng/easyswoole:1.0
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
       - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
@@ -27,7 +27,10 @@ services:
       - default
 
   php73:
-    image: registry.cn-hangzhou.aliyuncs.com/qiuapeng/easyswoole:2.0     
+    image: registry.cn-hangzhou.aliyuncs.com/qiuapeng/easyswoole:2.0
+    ports:
+      - "9501:9501"
+    tty: true # 如果不启动服务，需要打开这个让镜像启动
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
       - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
