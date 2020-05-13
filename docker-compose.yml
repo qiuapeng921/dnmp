@@ -27,9 +27,13 @@ services:
       - default
 
   php73:
-    image: qiuapeng921/easyswoole
+    image: qiuapeng921/php-swoole
     ports:
-      - "9500:9501"
+      - "9500:9500"
+      - "9501:9501"
+      - "9502:9502"
+      - "9503:9503"
+      - "9504:9504"
     tty: true # 如果不启动服务，需要打开这个让镜像启动
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
