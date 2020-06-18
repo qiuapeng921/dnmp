@@ -1,7 +1,7 @@
 # dnmp
 
 #### 介绍
-php7.3 + php7.2 + nginx + mysql + redis + phpmyadmin + redisadmin + elasticsearch6.8 + elastichq + rabbitmq + mongo + mongo-express 一键集成环境
+php7.3 + php7.2 + nginx + mysql + redis + phpmyadmin + redisadmin + rabbitmq + mongo + mongo-express 一键集成环境
 
 
 #### 软件架构
