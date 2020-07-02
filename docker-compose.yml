@@ -77,8 +77,8 @@ services:
       - "${RABBIT_MANAGE_HOST_PORT}:15672"
     hostname: myRabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=123456
+      - RABBITMQ_DEFAULT_USER: admin
+      - RABBITMQ_DEFAULT_PASS: 123456
     networks:
       - default
 
