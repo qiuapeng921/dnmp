@@ -104,6 +104,18 @@ services:
     networks:
       - default
 
+  elasticsearch:
+    image: elasticsearch
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - default
+
   portainer:
     image: portainer/portainer
     ports:
