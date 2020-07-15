@@ -14,8 +14,14 @@ services:
     networks:
       - default
 
-  php72:
-    image: registry.cn-hangzhou.aliyuncs.com/qiuapeng/easyswoole:1.0
+  easyswoole:
+    image: qiuapeng921/easyswoole
+    ports:
+      - "9505:9500"
+      - "9506:9501"
+      - "9507:9502"
+      - "9508:9503"
+      - "9509:9504"
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
       - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
@@ -26,7 +32,7 @@ services:
     networks:
       - default
 
-  php73:
+  php-swoole:
     image: qiuapeng921/php-swoole
     ports:
       - "9500:9500"
@@ -77,8 +83,8 @@ services:
       - "${RABBIT_MANAGE_HOST_PORT}:15672"
     hostname: myRabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER: admin
-      - RABBITMQ_DEFAULT_PASS: 123456
+      - "RABBITMQ_DEFAULT_USER=admin"
+      - "RABBITMQ_DEFAULT_PASS=123456"
     networks:
       - default
 
