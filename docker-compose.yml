@@ -111,7 +111,7 @@ services:
       - default
 
   elasticsearch:
-    image: elasticsearch
+    image: elasticsearch:7.8.0
     volumes:
       - ./data/elasticsearch:/usr/share/elasticsearch/data
     environment:
