@@ -135,5 +135,27 @@ services:
     networks:
       - default
 
+  gitea:
+    image: gitea/gitea:latest
+    restart: always
+    volumes:
+      - ./data/gitea:/data
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    networks:
+      - default
+
+  jenkins:
+    image: jenkins/jenkins:latest
+    restart: always
+    volumes:
+      - ./data/jenkins_home:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    networks:
+      - default
+
 networks:
   default:
