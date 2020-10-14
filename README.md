@@ -1,7 +1,7 @@
 # dnmp
 
 #### 介绍
-php7.3 + php7.2 + nginx + mysql + redis + phpmyadmin + redisadmin + rabbitmq + mongo + mongo-express 一键集成环境
+php7.3 + nginx + mysql + redis + elasticsearch + rabbitmq + mongo + mongo-express + portainer + gitea 一键集成环境
 
 
 #### 软件架构
@@ -33,31 +33,13 @@ DNMP（Docker + Nginx + MySQL + PHP7 + Redis）是一款全功能的LNMP一键�
 
 #### 使用说明
 
-1. 要修改端口、日志文件位置、以及是否替换source.list文件等，请修改.env文件，然后重新构建：  
-    ```bash
-    docker-compose build php72    # 重建单个服务
-    docker-compose build          # 重建全部服务
-    ```
-2. 切换PHP版本
-    ```
-    fastcgi_pass   php72:9000;
-    ```
-    要改用PHP7.3，修改为：
-    ```
-    fastcgi_pass   php73:9000;
-    ```
-    再 **重启 Nginx** 生效。
-    ```bash
-    docker exec -it dnmp_nginx_1 nginx -s reload
-    ```
 
-3. 添加快捷命令
+1. 添加快捷命令
     在开发的时候，我们可能经常使用`docker exec -it`切换到容器中，把常用的做成命令别名是个省事的方法。
     打开~/.bashrc，加上：
     ```bash
     alias dnginx='docker exec -it dnmp_nginx_1 /bin/sh'
-    alias dphp72='docker exec -it dnmp_php72_1 /bin/bash'
-    alias dphp73='docker exec -it dnmp_php73_1 /bin/bash'
+    alias dphp72='docker exec -it dnmp_php-swoole_1 /bin/sh'
     alias dmysql='docker exec -it dnmp_mysql_1 /bin/bash'
     alias dredis='docker exec -it dnmp_redis_1 /bin/sh'
     alias drabbit='docker exec -it dnmp_rabbit_1 /bin/bash'
