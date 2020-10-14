@@ -1,0 +1,6 @@
+*
+!.gitignore
+!nginx.conf
+!conf.d/certs/*
+!conf.d/laravel.conf
+!conf.d/localhost.conf
