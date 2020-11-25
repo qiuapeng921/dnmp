@@ -58,16 +58,6 @@ services:
     networks:
       - default
 
-  clickhouse-server:
-    image: yandex/clickhouse-server
-    ports:
-      - "8123:8123"
-      - "9009:9009"
-    volumes:
-      - ./data/clickhouse:/var/lib/clickhouse
-    networks:
-      - default
-
   rabbitmq:
     image: rabbitmq:${RABBIT_VERSION}
     restart: always
@@ -116,14 +106,6 @@ services:
     networks:
       - default
 
-  elastic-hq:
-    image: elastichq/elasticsearch-hq
-    restart: always
-    ports:
-      - "5000:5000"
-    networks:
-      - default
-
   kibana:
     image: kibana:6.8.13
     restart: always
@@ -139,17 +121,6 @@ services:
     volumes:
       - ${APP_DIR}:/opt/
     tty: true # 如果不启动服务，需要打开这个让镜像启动
-    networks:
-      - default
-
-  portainer:
-    image: portainer/portainer
-    restart: always
-    ports:
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./data/portainer:/data
     networks:
       - default
 
@@ -175,33 +146,14 @@ services:
     networks:
       - default
 
-  nsqlookupd:
-    image: nsqio/nsq
-    command: /nsqlookupd
+  portainer:
+    image: portainer/portainer
+    restart: always
     ports:
-      - "4160:4160"
-      - "4161:4161"
-    networks:
-      - default
-
-  nsqd:
-    image: nsqio/nsq
-    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
-    depends_on:
-      - nsqlookupd
-    ports:
-      - "4150:4150"
-      - "4151:4151"
-    networks:
-      - default
-
-  nsqadmin:
-    image: nsqio/nsq
-    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
-    depends_on:
-      - nsqlookupd
-    ports:
-      - "4171:4171"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
     networks:
       - default
 
