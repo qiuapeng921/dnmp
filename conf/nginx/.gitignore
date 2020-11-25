@@ -1,3 +1,4 @@
+*
 !nginx.conf
 !conf.d/localhost.conf
 !conf.d/laravel.conf
