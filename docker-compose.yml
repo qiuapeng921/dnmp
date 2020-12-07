@@ -26,8 +26,8 @@ services:
     tty: true # 如果不启动服务，需要打开这个让镜像启动
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
-      - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP72_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
     cap_add:
       - SYS_PTRACE
     networks:
@@ -59,15 +59,15 @@ services:
       - default
 
   rabbitmq:
-    image: rabbitmq:${RABBIT_VERSION}
+    image: rabbitmq:${RABBITMQ_VERSION}
     restart: always
     ports:
-      - "${RABBIT_HOST_PORT}:5672"
-      - "${RABBIT_MANAGE_HOST_PORT}:15672"
+      - "${RABBITMQ_HOST_PORT}:5672"
+      - "${RABBITMQ_MANAGE_HOST_PORT}:15672"
     hostname: myRabbitmq
     environment:
-      - "RABBITMQ_DEFAULT_USER=admin"
-      - "RABBITMQ_DEFAULT_PASS=123456"
+      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}"
+      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}"
     networks:
       - default
 
@@ -77,8 +77,8 @@ services:
     ports:
       - "${MONGO_HOST_PORT}:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
     networks:
       - default
 
@@ -86,33 +86,33 @@ services:
     image: mongo-express
     restart: always
     ports:
-      - 8081:8081
+      - "${MONGO_EXPRESS_HOST_PORT}:8081"
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+      ME_CONFIG_MONGODB_ADMINUSERNAME: "${ME_CONFIG_MONGODB_ADMINUSERNAME}"
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "${ME_CONFIG_MONGODB_ADMINPASSWORD}"
     networks:
       - default
 
   elasticsearch:
-    image: elasticsearch:6.8.13
+    image: elasticsearch:${ELASTICSEARCH_VERSION}
     restart: always
     volumes:
       - ./data/elasticsearch:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "${ELASTICSEARCH_HTTP_PORT}:9200"
+      - "${ELASTICSEARCH_TCP_PORT}:9300"
     networks:
       - default
 
   kibana:
-    image: kibana:6.8.13
+    image: kibana:${KIBANA_VERSION}
     restart: always
     volumes:
       - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
-      - "5601:5601"
+      - "${KIBANA_HTTP_PORT}:5601"
     networks:
       - default
 
@@ -121,28 +121,6 @@ services:
     volumes:
       - ${APP_DIR}:/opt/
     tty: true # 如果不启动服务，需要打开这个让镜像启动
-    networks:
-      - default
-
-  gitea:
-    image: gitea/gitea:latest
-    restart: always
-    volumes:
-      - ./data/gitea:/data
-    ports:
-      - "3000:3000"
-      - "2222:22"
-    networks:
-      - default
-
-  jenkins:
-    image: jenkins/jenkins:latest
-    restart: always
-    volumes:
-      - ./data/jenkins_home:/var/jenkins_home
-    ports:
-      - "8080:8080"
-      - "50000:50000"
     networks:
       - default
 
