@@ -14,7 +14,7 @@ services:
     networks:
       - default
 
-  php-swoole:
+  php_swoole:
     image: qiuapeng921/php-swoole:latest
     restart: always
     ports:
@@ -125,7 +125,7 @@ services:
       - default
 
   portainer:
-    image: portainer/portainer
+    image: portainer/portainer-ce
     restart: always
     ports:
       - "9000:9000"
