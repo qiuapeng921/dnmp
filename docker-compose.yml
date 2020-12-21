@@ -11,10 +11,12 @@ services:
       - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
+    depends_on:
+      - php_swoole
     networks:
       - default
 
-  php_swoole:
+  php-swoole:
     image: qiuapeng921/php-swoole:latest
     restart: always
     ports:
@@ -96,7 +98,7 @@ services:
     volumes:
       - ./data/elasticsearch:/usr/share/elasticsearch/data
     environment:
-      - discovery.type=single-node
+      - "discovery.type=single-node"
     ports:
       - "${ELASTICSEARCH_HTTP_PORT}:9200"
       - "${ELASTICSEARCH_TCP_PORT}:9300"
