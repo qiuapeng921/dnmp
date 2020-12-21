@@ -1,5 +1,5 @@
 *
 !nginx.conf
-!conf.d/localhost.conf
+!conf.d/default.conf
 !conf.d/laravel.conf
 !.gitignore
