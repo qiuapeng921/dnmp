@@ -1,7 +1,7 @@
 # dnmp
 
 #### 介绍
-php7.3 + nginx + mysql + redis + elasticsearch + kibana + rabbitmq + mongo + mongo-express + portainer 一键集成环境
+php7.3 + nginx + mysql + redis + elasticsearch + kibana + logstash + rabbitmq + kafka + zooKeeper +kafka-manager + mongo + mongo-express + portainer 一键集成环境
 
 
 #### 软件架构
