@@ -96,7 +96,8 @@ services:
     image: elasticsearch:${ELASTICSEARCH_VERSION}
     restart: always
     volumes:
-      - ./data/elasticsearch:/usr/share/elasticsearch/data
+      - ./data/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - ./data/elasticsearch/data:/usr/share/elasticsearch/data
     environment:
       - "discovery.type=single-node"
     ports:
@@ -105,11 +106,27 @@ services:
     networks:
       - default
 
+  logstash:
+    image: logstash:6.8.13
+    volumes:
+      - ./conf/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./log/:/data/logs/
+    depends_on:
+      - elasticsearch
+    ports:
+      - 4560:4560
+    networks:
+      - default
+
   kibana:
     image: kibana:${KIBANA_VERSION}
     restart: always
     volumes:
       - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      - "elasticsearch.hosts=http://elasticsearch:9200"
+    depends_on:
+      - elasticsearch
     ports:
       - "${KIBANA_HTTP_PORT}:5601"
     networks:
@@ -117,8 +134,6 @@ services:
 
   zookeeper:
     image: wurstmeister/zookeeper
-    volumes:
-      - ./data/zookeeper:/data
     ports:
       - "2181:2181"
     networks:
@@ -132,12 +147,11 @@ services:
       TZ: CST-8
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # 非必须，设置自动创建 topic
-      KAFKA_BROKER_ID: 1
+      # 非必须，设置
       KAFKA_MESSAGE_MAX_BYTES: 20000000
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
     depends_on:
       - zookeeper
