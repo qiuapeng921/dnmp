@@ -9,6 +9,7 @@ services:
     volumes:
       - ${APP_DIR}:/var/www/html/:rw
       - ${NGINX_CONFD_DIR}:/etc/nginx/conf.d/:rw
+      - ${NGINX_CERTS_DIR}:/etc/nginx/certs/:ro
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     depends_on:
@@ -179,7 +180,6 @@ services:
     volumes:
       - ./data/gitea:/data
     ports:
-      - "3000:3000"
       - "2222:22"
     networks:
       - default
