@@ -173,7 +173,7 @@ services:
     networks:
       - default
 
-  web:
+  gitea:
     image: gitea/gitea:latest
     restart: always
     volumes:
