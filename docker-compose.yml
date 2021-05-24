@@ -173,11 +173,14 @@ services:
     networks:
       - default
 
-  openjdk8:
-    image: suranagivinod/openjdk8
+  web:
+    image: gitea/gitea:latest
+    restart: always
     volumes:
-      - ${APP_DIR}:/opt/
-    tty: true # 如果不启动服务，需要打开这个让镜像启动
+      - ./data/gitea:/data
+    ports:
+      - "3000:3000"
+      - "2222:22"
     networks:
       - default
 
