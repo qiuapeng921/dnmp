@@ -1,0 +1,37 @@
+{
+    "packages": {
+        "pandamonk/hello": {
+            "dev-master": {
+                "name": "pandamonk/hello",
+                "version": "dev-master",
+                "version_normalized": "9999999-dev",
+                "source": {
+                    "type": "git",
+                    "url": "https://gitee.com/bnhh/composer_test.git",
+                    "reference": "6bf98f76b02dc28c9df6963099a05c0a302b0aaf"
+                },
+                "time": "2018-11-27T08:23:43+00:00",
+                "type": "library",
+                "autoload": {
+                    "files": [
+                        "SayHello.php"
+                    ],
+                    "psr-4": {
+                        "Jiang\\": "src/"
+                    }
+                },
+                "notification-url": "https://packagist.org/downloads/",
+                "license": [
+                    "MIT"
+                ],
+                "authors": [
+                    {
+                        "name": "pandamonk",
+                        "email": "pandamonk@xxx.com"
+                    }
+                ],
+                "description": "test"
+            }
+        }
+    }
+}

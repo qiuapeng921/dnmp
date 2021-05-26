@@ -1,0 +1,24 @@
+{
+    "name": "composer私有仓库",
+    "homepage": "http://packages.phpswoole.cn",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "http://gitlab-ce.k8s.tools.vchangyi.com/crs/sdk.git"
+        }
+    ],
+    "require-all": false,
+    "require-dependencies": true,
+    "require-dev-dependencies": true,
+    "require": {
+        "crs/sdk": "*"
+    },
+    "archive": {
+        "directory": "dist",
+        "format": "zip",
+        "skip-dev": true
+    },
+    "config": {
+        "secure-http": false
+    }
+}
