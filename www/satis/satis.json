@@ -1,6 +1,6 @@
 {
     "name": "composer私有仓库",
-    "homepage": "http://packagist.phpswoole.cn",
+    "homepage": "https://packagist.phpswoole.cn",
     "repositories": [
         {
             "type": "git",
