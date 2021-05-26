@@ -3,5 +3,5 @@
 !certs
 !conf.d/default.conf
 !conf.d/laravel.conf
-!conf.d/packages.conf
+!conf.d/packagist.conf
 !.gitignore
