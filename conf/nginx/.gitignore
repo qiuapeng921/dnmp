@@ -1,7 +1,0 @@
-*
-!certs/
-!nginx.conf
-!conf.d/default.conf
-!conf.d/laravel.conf
-!conf.d/packagist.conf
-!.gitignore
