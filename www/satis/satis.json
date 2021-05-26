@@ -1,6 +1,6 @@
 {
     "name": "composer私有仓库",
-    "homepage": "http://packages.phpswoole.cn",
+    "homepage": "http://packagist.phpswoole.cn",
     "repositories": [
         {
             "type": "git",
@@ -11,7 +11,7 @@
     "require-dependencies": true,
     "require-dev-dependencies": true,
     "require": {
-        "crs/sdk": "*"
+        "crs/sdk": "8.0.*"
     },
     "archive": {
         "directory": "dist",
