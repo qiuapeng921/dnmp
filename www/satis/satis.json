@@ -1,9 +1,10 @@
 {
     "name": "composer私有仓库",
-    "homepage": "http://packages.phpswoole.cn",
+    "homepage": "https://packagist.phpswoole.cn",
     "repositories": [
         {
             "type": "git",
+            "name": "crs/sdk",
             "url": "http://gitlab-ce.k8s.tools.vchangyi.com/crs/sdk.git"
         }
     ],
@@ -11,14 +12,19 @@
     "require-dependencies": true,
     "require-dev-dependencies": true,
     "require": {
-        "crs/sdk": "*"
+        "crs/sdk": "8.0.*"
     },
     "archive": {
         "directory": "dist",
         "format": "zip",
-        "skip-dev": true
+        "skip-dev": true,
+        "prefix-url": "https://packagist.phpswoole.cn"
     },
     "config": {
-        "secure-http": false
+        "secure-http": false,
+        "optimize-autoloader": false,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {}
     }
 }
