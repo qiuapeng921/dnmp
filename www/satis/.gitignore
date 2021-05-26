@@ -4,4 +4,4 @@
 /composer.phar
 /phpunit.xml
 /satis.phar
-dist
+./public/dist
