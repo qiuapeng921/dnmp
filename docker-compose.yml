@@ -185,10 +185,10 @@ services:
       - default
 
   portainer:
-    image: portainer/portainer-ce
+    image: portainer/portainer-ce:2.5.1-alpine
     restart: always
     ports:
-      - "9000:9000"
+      - "9090:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/portainer:/data
