@@ -589,7 +589,7 @@
       -->
     <remote_servers>
         <!-- Test only shard config for testing distributed storage -->
-        <test_shard_localhost>
+        <cluster_1>
             <!-- Inter-server per-cluster secret for Distributed queries
                  default: no secret (no authentication will be performed)
 
@@ -614,7 +614,7 @@
 
             <shard>
                 <!-- Optional. Whether to write data to just one of the replicas. Default: false (write data to all replicas). -->
-                <!-- <internal_replication>false</internal_replication> -->
+                <internal_replication>false</internal_replication>
                 <!-- Optional. Shard weight when writing data. Default: 1. -->
                 <!-- <weight>1</weight> -->
                 <replica>
@@ -624,7 +624,7 @@
                     <!-- <priority>1</priority> -->
                 </replica>
             </shard>
-        </test_shard_localhost>
+        </cluster_1>
         <test_cluster_two_shards_localhost>
              <shard>
                  <replica>
@@ -726,34 +726,25 @@
          See https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/replication/
       -->
 
-    <!--
+    
     <zookeeper>
         <node>
-            <host>example1</host>
-            <port>2181</port>
-        </node>
-        <node>
-            <host>example2</host>
-            <port>2181</port>
-        </node>
-        <node>
-            <host>example3</host>
+            <host>zookeeper</host>
             <port>2181</port>
         </node>
     </zookeeper>
-    -->
-
+   
     <!-- Substitutions for parameters of replicated tables.
           Optional. If you don't use replicated tables, you could omit that.
 
          See https://clickhouse.tech/docs/en/engines/table-engines/mergetree-family/replication/#creating-replicated-tables
       -->
-    <!--
+    
     <macros>
         <shard>01</shard>
-        <replica>example01-01-1</replica>
+        <replica>data01-01-1</replica>
     </macros>
-    -->
+   
 
 
     <!-- Reloading interval for embedded dictionaries, in seconds. Default: 3600. -->
