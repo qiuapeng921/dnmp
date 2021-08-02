@@ -28,6 +28,7 @@ services:
       - ${APP_DIR}:/var/www/html/:rw
       - ${PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ./conf/php/cacert.pem:/usr/local/etc/php/cacert.pem:ro
     cap_add:
       - SYS_PTRACE
     networks:
@@ -45,6 +46,20 @@ services:
       - default
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+
+  clickhouse:
+    image: yandex/clickhouse-server
+    restart: always
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"            
+    volumes:
+      - ./conf/clickhouse/config.xml:/etc/clickhouse-server/config.xml:rw
+      - ./conf/clickhouse/users.xml:/etc/clickhouse-server/users.xml:rw
+      - ./data/clickhouse:/var/lib/clickhouse:rw
+    networks:
+      - default
 
   redis:
     image: redis:${REDIS_VERSION}
@@ -152,7 +167,7 @@ services:
       KAFKA_MESSAGE_MAX_BYTES: 20000000
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_LISTENERS: PLAINTEXT://:9092
     depends_on:
       - zookeeper
