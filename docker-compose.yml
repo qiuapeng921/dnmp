@@ -116,6 +116,7 @@ services:
       - ./data/elasticsearch/data:/usr/share/elasticsearch/data
     environment:
       - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms64m -Xmx128m"
     ports:
       - "${ELASTICSEARCH_HTTP_PORT}:9200"
       - "${ELASTICSEARCH_TCP_PORT}:9300"
